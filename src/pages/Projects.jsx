@@ -1,9 +1,62 @@
-import React from 'react'
+import { useGSAP } from '@gsap/react'
+import ProjectCard from '../components/projects/ProjectsCard'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
+
 
 const Projects = () => {
+
+  const projects = [{
+    image1: 'https://k72.ca/uploads/caseStudies/PJC/Thumbnails/PJC_SiteK72_Thumbnail_1280x960-1280x960.jpg',
+    image2: 'https://k72.ca/uploads/caseStudies/WIDESCAPE/WS---K72.ca---Thumbnail-1280x960.jpg'
+  }, {
+    image1: 'https://k72.ca/uploads/caseStudies/OKA/OKA_thumbnail-1280x960.jpg',
+    image2: 'https://k72.ca/uploads/caseStudies/Opto/thumbnailimage_opto-1280x960.jpg'
+  }, {
+    image1: 'https://k72.ca/uploads/caseStudies/LAMAJEURE_-_Son_sur_mesure/chalaxeur-thumbnail_img-1280x960.jpg',
+    image2: 'https://k72.ca/uploads/caseStudies/SHELTON/thumbnailimage_shelton-1280x960.jpg'
+  },
+  {
+    image1: 'https://k72.ca/images/caseStudies/Opto_Reseau_Brand/opto_thumbnail2.jpg?w=1280&h=960&s=7f23d7d824eb04c784dcf51380fe3996',
+    image2: 'https://k72.ca/images/caseStudies/COUP_FUMANT/CF_thumbnail.jpg?w=1280&h=960&s=c119303a20520c4188aa3f592038fd4c'
+  },
+  {
+    image1: 'https://k72.ca/images/caseStudies/BEST/BEST_site_Thumbnail.jpg?w=1280&h=960&s=2b73eecfda8d95a72efa768383b50860',
+    image2: 'https://k72.ca/images/caseStudies/A_table/thumbnailimage_atable2.jpg?w=1280&h=960&s=b1cfc8abd6135cf78017737130e49e47'
+  },
+]
+
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  useGSAP(function () {
+    gsap.from('.hero', {
+      height: '100px',
+      stagger: {
+        amount: 0.4
+      },
+      scrollTrigger: {
+        trigger: '.lol',
+        start: 'top 100%',
+        end: 'top -150%',
+        scrub: true
+      }
+    })
+  })
+
   return (
-    <div>
-     projects 
+    <div className='lg:p-4 p-2 mb-[100vh]'>
+      <div className=' pt-[45vh]'>
+        <h2 className='font-[font2] lg:text-[9.5vw] text-7xl uppercase'>Projects</h2>
+      </div>
+      <div className='-lg:mt-20 lol'>
+        {projects.map(function (elem, idx) {
+          return <div key={idx} className='hero w-full lg:h-212.5 mb-4 flex lg:flex-row flex-col lg:gap-4 gap-2'>
+            <ProjectCard image1={elem.image1} image2={elem.image2} />
+          </div>
+        })}
+
+      </div>
     </div>
   )
 }
